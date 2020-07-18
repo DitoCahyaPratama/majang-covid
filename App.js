@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Intro from './screens/Intro'
 import { AsyncStorage } from 'react-native'
+import { IntroScreen, LoginScreen, RegisterScreen } from './screens'
 
 export default function App() {
   const [data, setData] = useState({
@@ -27,11 +27,12 @@ export default function App() {
 
   if(data.intro === "true"){
     return (
-      <></>
+      // <LoginScreen />
+      <RegisterScreen />
     )  
   }
 
   return (
-    <Intro />
+    <IntroScreen />
   );
 }
