@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AsyncStorage } from 'react-native'
-import { IntroScreen, LoginScreen, RegisterScreen } from './screens'
-import Beranda from './screens/Beranda'
+import { IntroScreen, LoginScreen, RegisterScreen, BerandaScreen, NotifikasiScreen } from './screens'
 
 export default function App() {
   const [data, setData] = useState({
@@ -30,12 +29,12 @@ export default function App() {
     return (
       // <LoginScreen />
       // <RegisterScreen />
-      <Beranda />
+      // <BerandaScreen />
+      <NotifikasiScreen />
     )
   }
 
   return (
-    <Beranda />
-    // <IntroScreen />
+    <IntroScreen />
   );
 }

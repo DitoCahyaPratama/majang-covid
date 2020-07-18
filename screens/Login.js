@@ -3,6 +3,8 @@ import { View, Text, ImageBackground, TextInput, StyleSheet, TouchableOpacity } 
 import stylesAll from './style'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import * as theme from '../theme'
+import { firebase } from '../config/firebase'
+
 
 function Login() {
   const [data, setData] = useState({
@@ -10,6 +12,22 @@ function Login() {
     password: '',
     isError: '',
   })
+
+  const onLogin = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(data.email, data.password)
+      .then(signedUser => {
+        console.log(signedUser)
+        alert('sukses')
+        // this.props.history.push('/dashboard')
+      })
+      .catch(err => {
+        alert(err)
+        console.log(err)
+      })
+  }
+
   return (
     <ImageBackground style={{ flex: 1 }} source={require('../assets/bg-login.png')}>
       {/* <KeyboardAwareScrollView style={{ flex: 1, width: '100%' }} */}
@@ -45,7 +63,7 @@ function Login() {
             </View>
             <Text style={{ textAlign: 'right' }}>Lupa password ?</Text>
             <Text style={data.isError ? stylesAll.errorText : stylesAll.hiddenErrorText}>Password Salah</Text>
-            <TouchableOpacity style={[stylesAll.button, stylesAll.btnGreen]} onPress={() => loginHandler()}>
+            <TouchableOpacity style={[stylesAll.button, stylesAll.btnGreen]} onPress={() => onLogin()}>
               <Text style={stylesAll.btnTextGreen}>MASUK</Text>
             </TouchableOpacity>
             <Text style={stylesAll.divider}>

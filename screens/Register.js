@@ -3,6 +3,7 @@ import { View, Text, ImageBackground, TextInput, StyleSheet, TouchableOpacity } 
 import stylesAll from './style'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import * as theme from '../theme'
+import { firebase } from '../config/firebase'
 
 function Register() {
   const [data, setData] = useState({
@@ -11,6 +12,21 @@ function Register() {
     password: '',
     isError: '',
   })
+
+  const onRegister = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(data.email, data.password)
+      .then(createdUser => {
+        console.log(createdUser)
+        alert('sukses')
+      })
+      .catch(err => {
+        console.log(err)
+        alert(err)
+      })
+  }
+
   return (
     <ImageBackground style={{ flex: 1 }} source={require('../assets/bg-login.png')}>
       {/* <KeyboardAwareScrollView style={{ flex: 1, width: '100%' }} */}
@@ -55,7 +71,7 @@ function Register() {
               </View>
             </View>
             <Text style={data.isError ? stylesAll.errorText : stylesAll.hiddenErrorText}>Password Salah</Text>
-            <TouchableOpacity style={[stylesAll.button, stylesAll.btnGreen]} onPress={() => loginHandler()}>
+            <TouchableOpacity style={[stylesAll.button, stylesAll.btnGreen]} onPress={() => onRegister()}>
               <Text style={stylesAll.btnTextGreen}>DAFTAR</Text>
             </TouchableOpacity>
             <Text style={stylesAll.divider}>

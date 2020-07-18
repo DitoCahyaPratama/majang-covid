@@ -1,3 +1,5 @@
 export { default as IntroScreen } from './Intro'
 export { default as RegisterScreen } from './Register'
 export { default as LoginScreen } from './Login'
+export { default as BerandaScreen } from './Beranda'
+export { default as NotifikasiScreen } from './Notifikasi'

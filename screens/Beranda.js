@@ -2,8 +2,17 @@ import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Table, Row, Rows } from 'react-native-table-component';
 
 const Beranda = () => {
+    const [statistika, setStatistika] = React.useState({
+        tableHead: ['', 'Sembuh', 'Kritis', 'Meninggal'],
+        tableData: [
+            ['Lumajang', '203', '1', '4'],
+            ['Senduro', '21', '0', '1']
+        ]
+    })
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -30,8 +39,13 @@ const Beranda = () => {
                         <View style={styles.bodyCard}></View>
                         <View style={styles.bodyCard}></View>
                     </View>
-                    <View style={styles.bodyAds}>
-
+                    <View style={styles.bodyAds}></View>
+                    <View style={styles.tableContent}>
+                        <Text style={styles.statistikaText}>Statistika Kecamatan</Text>
+                        <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
+                            <Row data={statistika.tableHead} style={styles.head} textStyle={styles.tableTitle} />
+                            <Rows data={statistika.tableData} textStyle={styles.tableDesc} />
+                        </Table>
                     </View>
                 </View>
                 <View style={styles.footer}></View>
@@ -42,8 +56,7 @@ const Beranda = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        marginTop: 20
+        flex: 1
     },
     headerContainer: {
         height: 250,
@@ -102,6 +115,28 @@ const styles = StyleSheet.create({
         height: 150,
         backgroundColor: 'grey',
         marginTop: 30
+    },
+    tableContent: {
+        marginHorizontal: 20,
+        marginBottom: 20
+    },
+    head: {
+        height: 40,
+        backgroundColor: '#f1f8ff'
+    },
+    tableTitle: {
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    tableDesc: {
+        margin: 6,
+        textAlign: 'center'
+    },
+    statistikaText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 20
     }
 })
 
